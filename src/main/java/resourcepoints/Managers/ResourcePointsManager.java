@@ -25,6 +25,10 @@ public class ResourcePointsManager {
         return resourcePointsManager;
     }
 
+    public ArrayList<ResourcePoint> getResourcePoints() {
+        return resourcePoints;
+    }
+
     private void createResourcePoint(){
 
         Location resourcePointLocation = ResourcePoint.generateLocation(ResourcePoints.getInstance().getWorldToSpawnResourcePoints().getWorldBorder());

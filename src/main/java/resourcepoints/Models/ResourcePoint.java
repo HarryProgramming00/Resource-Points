@@ -33,9 +33,11 @@ public class ResourcePoint {
         //Create loop for giving items to chest and despawning once done
     }
 
+    public Location getChestLocation() {
+        return chestLocation;
+    }
 
-
-        public void showFakeBeacon(Material glassColor, Location locationOfBeacon) {
+    public void showFakeBeacon(Material glassColor, Location locationOfBeacon) {
 
             for (Player player : Bukkit.getOnlinePlayers()) {
 
@@ -166,9 +168,22 @@ public class ResourcePoint {
             showFakeBeacon(Material.BLUE_STAINED_GLASS, locationOfBeacon);
             if(countdownBossBar.updateBeam()){
                 spawnChest();
+                startChestDespawnTime();
                 task.cancel();
             }
 
         }, 0L, 20L); // update every second (20 ticks)
+    }
+
+    public void startChestDespawnTime(){
+
+        Bukkit.getScheduler().runTaskLater(ResourcePoints.getInstance(), this::chestDespawn, 20L * 180);
+
+    }
+
+    public void chestDespawn(){
+
+        Block block = this.chestLocation.getBlock();
+        block.setType(Material.AIR);
     }
 }
