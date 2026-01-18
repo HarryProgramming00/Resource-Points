@@ -5,6 +5,8 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+import resourcepoints.Listeners.BlockBreakListener;
+import resourcepoints.Listeners.BlockPlaceListener;
 import resourcepoints.Managers.ResourcePointsManager;
 
 import java.util.ArrayList;
@@ -25,6 +27,8 @@ public class ResourcePoints extends JavaPlugin {
         this.saveDefaultConfig();
 
         //Register Listener for broken blocks.
+        getServer().getPluginManager().registerEvents(new BlockBreakListener(), this);
+        getServer().getPluginManager().registerEvents(new BlockPlaceListener(), this);
 
         // Create the block broken check for each dedicated block type.
         loadConfigFile();
