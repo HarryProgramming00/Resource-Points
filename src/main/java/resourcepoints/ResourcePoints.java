@@ -1,5 +1,7 @@
 package resourcepoints;
 
+import com.sk89q.worldguard.WorldGuard;
+import me.angeschossen.lands.api.LandsIntegration;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -17,10 +19,16 @@ public class ResourcePoints extends JavaPlugin {
     private static ResourcePoints instance;
     private World worldToSpawnResourcePoints;
     private ArrayList<Material> materials;
+    private LandsIntegration landsAPI = LandsIntegration.of(this);
+    private boolean worldGuardEnabled;
+    private boolean landsEnabled;
 
     @Override
     public void onEnable() {
         instance = this;
+
+        this.worldGuardEnabled = getServer().getPluginManager().getPlugin("WorldGuard") != null;
+        this.landsEnabled = getServer().getPluginManager().getPlugin("Lands") != null;
 
         //Register Commands
 
@@ -32,7 +40,6 @@ public class ResourcePoints extends JavaPlugin {
 
         // Create the block broken check for each dedicated block type.
         loadConfigFile();
-
         ResourcePointsManager.getResourcePointsManager().startResourcePointCreationTimer();
     }
 
@@ -70,5 +77,17 @@ public class ResourcePoints extends JavaPlugin {
 
     public World getWorldToSpawnResourcePoints() {
         return worldToSpawnResourcePoints;
+    }
+
+    public LandsIntegration getLandsAPI() {
+        return landsAPI;
+    }
+
+    public boolean isWorldGuardEnabled() {
+        return worldGuardEnabled;
+    }
+
+    public boolean isLandsEnabled() {
+        return landsEnabled;
     }
 }

@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import resourcepoints.Managers.WaypointBeamManager;
 import resourcepoints.ResourcePoints;
+import resourcepoints.Util.ResourcePointUtilities;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -124,8 +125,10 @@ public class ResourcePoint {
         Location chosenLocation = null;
 
         int highestYBlock;
+        boolean onTopOfClaim;
 
         do {
+
             int randomX = ThreadLocalRandom.current().nextInt(minXCoordinate, maxXCoordinate);
             int randomZ = ThreadLocalRandom.current().nextInt(minZCoordinate, maxZCoordinate);
 
@@ -136,7 +139,22 @@ public class ResourcePoint {
 
             chosenLocation = new Location(worldBorder.getWorld(), randomX, highestYBlock, randomZ);
 
-        }while (highestYBlock > (worldBorder.getWorld().getMaxHeight() - 40));
+            onTopOfClaim = false;
+
+
+           if(ResourcePoints.getInstance().isLandsEnabled()) {
+               if (ResourcePointUtilities.isLocationInALandClaim(chosenLocation)) {
+                   onTopOfClaim = true;
+               }
+           }
+
+           if(ResourcePoints.getInstance().isWorldGuardEnabled()){
+              if(ResourcePointUtilities.isLocationInAWorldGuardRegion(chosenLocation)) {
+                  onTopOfClaim = true;
+               }
+           }
+
+        }while ((highestYBlock > (worldBorder.getWorld().getMaxHeight() - 40)) || onTopOfClaim);
 
         return chosenLocation;
     }

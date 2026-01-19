@@ -55,6 +55,6 @@ public class ResourcePointsManager {
                 });
 
             }
-        }.runTaskTimerAsynchronously(ResourcePoints.getInstance(), 0L, 20L * 90); // every 2 seconds
+        }.runTaskTimerAsynchronously(ResourcePoints.getInstance(), 0L, 20L * 20); // every 2 seconds
     }
 }
