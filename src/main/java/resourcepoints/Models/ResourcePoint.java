@@ -103,7 +103,6 @@ public class ResourcePoint {
 
 
     public void announceResourcePointLocation(){
-        Bukkit.broadcastMessage("test2");
         Bukkit.broadcastMessage("A resource point has spawned at " + this.chestLocation.getBlockX() +  " " +
                 this.chestLocation.getBlockY() +  " " + this.chestLocation.getBlockZ());
     }
