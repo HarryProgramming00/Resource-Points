@@ -3,3 +3,15 @@ world: world
 materials:
   - GOLD_INGOT
 
+
+#How often a new resource point spawns (seconds)
+spawn-cycle-time: 3600
+
+#How long each resource point capture time lasts for (seconds)
+capture-time: 1200
+
+#How long the chest with loot should last for until it despawns (seconds)
+chest-despawn-time: 360
+
+#Distance around capture point that players cannot mine or place blocks
+capture-point-protection-range: 50

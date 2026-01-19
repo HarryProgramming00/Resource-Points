@@ -22,6 +22,10 @@ public class ResourcePoints extends JavaPlugin {
     private LandsIntegration landsAPI = LandsIntegration.of(this);
     private boolean worldGuardEnabled;
     private boolean landsEnabled;
+    private int spawnCycleTime;
+    private int captureTime;
+    private int chestDespawnTime;
+    private int capturePointProtectionRange;
 
     @Override
     public void onEnable() {
@@ -54,6 +58,11 @@ public class ResourcePoints extends JavaPlugin {
         }
 
         this.materials = getMaterialsFromStrings((List<String>) config.getList("materials"));
+
+        this.spawnCycleTime = config.getInt("spawn-cycle-time");
+        this.captureTime = config.getInt("capture-time");
+        this.chestDespawnTime = config.getInt("chest-despawn-time");
+        this.capturePointProtectionRange = config.getInt("capture-point-protection-range");
     }
 
     private ArrayList<Material> getMaterialsFromStrings(List<String> materialsStrings){
@@ -89,5 +98,21 @@ public class ResourcePoints extends JavaPlugin {
 
     public boolean isLandsEnabled() {
         return landsEnabled;
+    }
+
+    public int getSpawnCycleTime() {
+        return spawnCycleTime;
+    }
+
+    public int getCaptureTime() {
+        return captureTime;
+    }
+
+    public int getChestDespawnTime() {
+        return chestDespawnTime;
+    }
+
+    public int getCapturePointProtectionRange() {
+        return capturePointProtectionRange;
     }
 }

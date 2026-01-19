@@ -11,7 +11,7 @@ public class BlockBreakListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onBlockBreak(BlockBreakEvent event){
-        if(ResourcePointUtilities.isInDistanceToAResourcePoint(event.getBlock().getLocation(), 50)){
+        if(ResourcePointUtilities.isInDistanceToAResourcePoint(event.getBlock().getLocation(), ResourcePoints.getInstance().getCapturePointProtectionRange())){
             event.setCancelled(true);
         }
     }

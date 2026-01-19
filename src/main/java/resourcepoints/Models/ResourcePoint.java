@@ -132,9 +132,6 @@ public class ResourcePoint {
             int randomX = ThreadLocalRandom.current().nextInt(minXCoordinate, maxXCoordinate);
             int randomZ = ThreadLocalRandom.current().nextInt(minZCoordinate, maxZCoordinate);
 
-            Bukkit.broadcastMessage("X: " + randomX);
-            Bukkit.broadcastMessage("Z: " + randomZ);
-
             highestYBlock = (worldBorder.getWorld().getHighestBlockYAt(randomX, randomZ) + 1);
 
             chosenLocation = new Location(worldBorder.getWorld(), randomX, highestYBlock, randomZ);
@@ -179,7 +176,7 @@ public class ResourcePoint {
         Location locationOfBeacon = this.chestLocation.clone();
         locationOfBeacon.subtract(0, 2, 0);
 
-        countdownBossBar = new CountdownBossBar(this.chestLocation, 30);
+        countdownBossBar = new CountdownBossBar(this.chestLocation, ResourcePoints.getInstance().getCaptureTime());
         countdownBossBar.startCountdownBossBar();
 
         Bukkit.getScheduler().runTaskTimer(ResourcePoints.getInstance(), task -> {
@@ -195,7 +192,7 @@ public class ResourcePoint {
 
     public void startChestDespawnTime(){
 
-        Bukkit.getScheduler().runTaskLater(ResourcePoints.getInstance(), this::chestDespawn, 20L * 180);
+        Bukkit.getScheduler().runTaskLater(ResourcePoints.getInstance(), this::chestDespawn, 20L * ResourcePoints.getInstance().getChestDespawnTime());
 
     }
 
